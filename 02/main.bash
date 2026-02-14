@@ -1,5 +1,7 @@
 #!/bin/bash
 
+chmod +x main.bash
+
 HOSTNAME=$(hostname)
 TIMEZONE=$(timedatectl | grep 'zone:' | awk '{print $3}')
 OS=$(hostnamectl | grep 'Operating' | awk '{print $3, $4, $5}')
