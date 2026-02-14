@@ -18,15 +18,14 @@ SPACE_ROOT_USED=$(df -B1 | awk 'NR==2{printf("%.2f", $3/1024/1024)}')
 SPACE_ROOT_FREE=$(df -B1 | awk 'NR==2{printf("%.2f", $4/1024/1024)}')
 
 OFFSET=$(date +"%z")
-
 sign=${OFFSET:0:1}
 hours=$((10#${OFFSET:1:2}))
-minutes=${OFFSET:3:2}        
+minutes=${OFFSET:3:2}
 
 if [ "$minutes" != "00" ]; then
-    TIMEZONE="UTC ${sign}${hours}:${minutes}"
+    TIMEZONE="$TIMEZONE UTC ${sign}${hours}:${minutes}"
 else
-    TIMEZONE="UTC ${sign}${hours}"
+    TIMEZONE="$TIMEZONE UTC ${sign}${hours}"
 fi
 
 echo "HOSTNAME = $HOSTNAME"
