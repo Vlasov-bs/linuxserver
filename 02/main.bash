@@ -17,11 +17,16 @@ SPACE_ROOT=$(df -B1 | awk 'NR==2{printf("%.2f", $2/1024/1024)}')
 SPACE_ROOT_USED=$(df -B1 | awk 'NR==2{printf("%.2f", $3/1024/1024)}')
 SPACE_ROOT_FREE=$(df -B1 | awk 'NR==2{printf("%.2f", $4/1024/1024)}')
 
-if [ $(date +"%z" | cut -c2) == "0" ]
-then
-TIMEZONE="$TIMEZONE UTC $(date +"%z" | awk '{split($1, a, ""); print a[1]""a[3]}')"
+OFFSET=$(date +"%z")
+
+sign=${OFFSET:0:1}
+hours=$((10#${OFFSET:1:2}))
+minutes=${OFFSET:3:2}        
+
+if [ "$minutes" != "00" ]; then
+    TIMEZONE="UTC ${sign}${hours}:${minutes}"
 else
-TIMEZONE="$TIMEZONE UTC $(date +"%z" | awk '{split($1, a, ""); print a[1]""a[2]""a[3]}')"
+    TIMEZONE="UTC ${sign}${hours}"
 fi
 
 echo "HOSTNAME = $HOSTNAME"
