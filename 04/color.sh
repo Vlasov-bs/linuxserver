@@ -1,14 +1,10 @@
 #!/bin/bash
 
-# --- Цветовая схема по умолчанию ---
-# column1: фон=6(чёрный), шрифт=1(белый)
-# column2: фон=2(красный), шрифт=4(синий)
 DEFAULT_COL1_BG=6
 DEFAULT_COL1_FG=1
 DEFAULT_COL2_BG=2
 DEFAULT_COL2_FG=4
 
-# --- Чтение конфигурационного файла ---
 CONFIG_FILE="$(dirname "$0")/config.conf"
 
 COL1_BG=""
@@ -18,10 +14,6 @@ COL2_FG=""
 
 if [ -f "$CONFIG_FILE" ]; then
   while IFS='=' read -r key value; do
-    # Пропуск пустых строк и комментариев
-    [[ -z "$key" || "$key" =~ ^# ]] && continue
-    key=$(echo "$key" | xargs)
-    value=$(echo "$value" | xargs)
     case "$key" in
       column1_background)  COL1_BG="$value" ;;
       column1_font_color)  COL1_FG="$value" ;;
@@ -31,7 +23,6 @@ if [ -f "$CONFIG_FILE" ]; then
   done < "$CONFIG_FILE"
 fi
 
-# --- Флаги: использовался ли конфиг или дефолт ---
 COL1_BG_IS_DEFAULT=true
 COL1_FG_IS_DEFAULT=true
 COL2_BG_IS_DEFAULT=true
@@ -60,9 +51,6 @@ if [[ -n "$COL2_FG" && "$COL2_FG" =~ ^[1-6]$ ]]; then
 else
   COL2_FG=$DEFAULT_COL2_FG
 fi
-
-# --- Таблица цветов ---
-# 1-белый, 2-красный, 3-зелёный, 4-синий, 5-фиолетовый, 6-чёрный
 
 color_name() {
   case $1 in

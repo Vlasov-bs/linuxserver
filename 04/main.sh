@@ -30,7 +30,6 @@ print_line "SPACE_ROOT_FREE" "$SPACE_ROOT_FREE MB"
 
 echo ""
 
-# --- Вывод цветовой схемы ---
 if [ "$COL1_BG_IS_DEFAULT" = true ]; then
   echo "Column 1 background = default ($(color_name $COL1_BG))"
 else
