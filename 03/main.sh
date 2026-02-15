@@ -1,10 +1,10 @@
 #!/bin/bash
 
 chmod +x main.sh
-chmod +x param.sh
+chmod +x color.sh
 chmod +x info.sh
 
-. param.sh $1 $2 $3 $4
+. color.sh
 . info.sh
 
 
