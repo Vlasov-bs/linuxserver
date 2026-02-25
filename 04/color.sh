@@ -52,6 +52,18 @@ else
   COL2_FG=$DEFAULT_COL2_FG
 fi
 
+if [ "$COL1_BG" -eq "$COL1_FG" ]; then
+    echo "Ошибка: фон и шрифт столбца 1 совпадают ($(color_name $COL1_BG))."
+    echo "Измените значения в config.conf"
+    exit 1
+fi
+
+if [ "$COL2_BG" -eq "$COL2_FG" ]; then
+    echo "Ошибка: фон и шрифт столбца 2 совпадают ($(color_name $COL2_BG))."
+    echo "Измените значения в config.conf"
+    exit 1
+fi
+
 color_name() {
   case $1 in
     1) echo "white" ;;
